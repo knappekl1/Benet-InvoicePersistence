@@ -5,6 +5,7 @@
   "dependencies": {
     "Microsoft.Activities.Extensions": "[2.0.6.9]",
     "UiPath.IntelligentOCR.Activities": "[4.9.0-preview]",
+    "UiPath.Mail.Activities": "[1.9.3]",
     "UiPath.Persistence.Activities": "[1.1.7]",
     "UiPath.System.Activities": "[20.8.0-preview]",
     "UiPath.UIAutomation.Activities": "[20.8.0-preview]",
