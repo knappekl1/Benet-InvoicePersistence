@@ -231,13 +231,18 @@
               <av:PointCollection x:Key="ConnectorLocation">594,433.333333333333 594,483</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Process Results" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
+          <Sequence DisplayName="Process Results" sap:VirtualizedContainerService.HintSize="982,878" sap2010:WorkflowViewState.IdRef="Sequence_18">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[HumanClassifications.Any]" DisplayName="If Classified" sap:VirtualizedContainerService.HintSize="940,755.333333333333" sap2010:WorkflowViewState.IdRef="If_2">
+            <If sap2010:Annotation.AnnotationText="Only Invoice classification is further processed- other types to be added later on, then the condition here will be Classifications.Any" Condition="[HumanClassifications(0).DocumentTypeId.Contains(&quot;Invoices.Accounting.Invoice&quot;)]" DisplayName="If Classified" sap:VirtualizedContainerService.HintSize="940,786" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
               <If.Then>
                 <Sequence DisplayName="Save Results" sap:VirtualizedContainerService.HintSize="518,601.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
                   <sap:WorkflowViewStateService.ViewState>
@@ -278,7 +283,7 @@
             </If>
           </Sequence>
           <FlowStep.Next>
-            <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID5" DisplayName="Flow Switch" sap:VirtualizedContainerService.HintSize="70,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
+            <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID5" DisplayName="Flow Switch" Expression="[if(Classifications.Any, &quot;Processed&quot;, &quot;Unclassified&quot;)]" sap:VirtualizedContainerService.HintSize="70,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
               <FlowSwitch.Default>
                 <FlowStep x:Name="__ReferenceID6">
                   <sap:WorkflowViewStateService.ViewState>
@@ -306,9 +311,6 @@
                   </FlowStep.Next>
                 </FlowStep>
               </FlowSwitch.Default>
-              <FlowSwitch.Expression>
-                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="if(Classifications.Any, &quot;Processed&quot;, &quot;Unclassified&quot;)" />
-              </FlowSwitch.Expression>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">559,483</av:Point>
@@ -348,7 +350,7 @@
                         <av:PointCollection x:Key="ConnectorLocation">594,801.333333333333 594,851</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="Move Email to Folder" sap:VirtualizedContainerService.HintSize="1206,1943.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                    <Sequence DisplayName="Move Email to Folder" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_30">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
