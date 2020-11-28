@@ -244,12 +244,12 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_14">
+                <Assign DisplayName="Init New ClassificationResult Instance" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_14">
                   <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">[HumanClassifications(0).DocumentTypeId]</OutArgument>
+                    <OutArgument x:TypeArguments="p:ClassificationResult[]">[HumanClassifications]</OutArgument>
                   </Assign.To>
                   <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">NotClassified</InArgument>
+                    <InArgument x:TypeArguments="p:ClassificationResult[]">[{New ClassificationResult("DocTypeID","33", New ResultsDocumentBounds(1, 5))}]</InArgument>
                   </Assign.Value>
                 </Assign>
               </If.Then>
