@@ -231,12 +231,29 @@
               <av:PointCollection x:Key="ConnectorLocation">594,433.333333333333 594,483</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Process Results" sap:VirtualizedContainerService.HintSize="982,878" sap2010:WorkflowViewState.IdRef="Sequence_18">
+          <Sequence DisplayName="Process Results" sap:VirtualizedContainerService.HintSize="982,1164.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_18">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+            <If sap2010:Annotation.AnnotationText="Excludes all except Invoice Doc Type from processing here" Condition="[Not HumanClassifications.Any]" sap:VirtualizedContainerService.HintSize="940,246.666666666667" sap2010:WorkflowViewState.IdRef="If_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_14">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[HumanClassifications(0).DocumentTypeId]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">NotClassified</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+            </If>
             <If sap2010:Annotation.AnnotationText="Only Invoice classification is further processed- other types to be added later on, then the condition here will be Classifications.Any" Condition="[HumanClassifications(0).DocumentTypeId.Contains(&quot;Invoices.Accounting.Invoice&quot;)]" DisplayName="If Classified" sap:VirtualizedContainerService.HintSize="940,786" sap2010:WorkflowViewState.IdRef="If_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
