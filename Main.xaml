@@ -84,7 +84,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="38">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="76">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -123,6 +123,7 @@
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap:VirtualizedContainerService.HintSize="762,1274.66666666667" sap2010:WorkflowViewState.IdRef="Flowchart_2">
@@ -159,7 +160,7 @@
           <av:PointCollection x:Key="ConnectorLocation">594,313.333333333333 594,364</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Validate" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
+      <Sequence DisplayName="Validate" sap:VirtualizedContainerService.HintSize="520,1658.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_14">
         <Sequence.Variables>
           <Variable x:TypeArguments="uiaam:DocumentClassificationActionData" Name="HumanOutput" />
         </Sequence.Variables>
@@ -176,7 +177,7 @@
           </p1:CreateDocumentClassificationAction.BucketFolderPath>
         </p1:CreateDocumentClassificationAction>
         <p1:WaitForDocumentClassificationActionAndResume ActionOutput="{x:Null}" DocumentPath="{x:Null}" DownloadFolderPath="{x:Null}" StatusMessage="{x:Null}" TimeoutMs="{x:Null}" WaitItemDataObject="{x:Null}" ActionInput="[HumanOutput]" AutomaticClassificationResults="[AutoClassifications]" DisplayName="Wait For Document Classification Action And Resume" DocumentObjectModel="[DOM]" DocumentText="[DocText]" sap:VirtualizedContainerService.HintSize="478,372" sap2010:WorkflowViewState.IdRef="WaitForDocumentClassificationActionAndResume_2" RemoveDataFromStorage="True" Taxonomy="[Taxonomy]" ValidatedClassificationResults="[HumanClassifications]" />
-        <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[Path.Combine(Environment.CurrentDirectory,&quot;DocumentProcessing&quot;,&quot;taxonomy.json&quot;)]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="478,22" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="taxonomy.json" StorageBucketName="InvoiceBucket" />
+        <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[Path.Combine(Environment.CurrentDirectory,&quot;DocumentProcessing&quot;,&quot;taxonomy.json&quot;)]" DisplayName="Download Taxonomy File" sap:VirtualizedContainerService.HintSize="478,22" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="taxonomy.json" StorageBucketName="InvoiceBucket" />
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;Taxonomy path: &quot; + Path.Combine(Environment.CurrentDirectory,&quot;DocumentProcessing&quot;,&quot;taxonomy.json&quot;)]" />
         <p2:TrainClassifiersScope HumanValidatedData="{x:Null}" DisplayName="Train Classifiers Scope" DocumentObjectModel="[DOM]" DocumentPath="[in_FilePath]" DocumentText="[DocText]" sap:VirtualizedContainerService.HintSize="478,373.333333333333" HumanValidatedClassificationData="[HumanClassifications]" sap2010:WorkflowViewState.IdRef="TrainClassifiersScope_2" Taxonomy="[Taxonomy]" TaxonomyConfiguration="{}{&quot;TaxonomyMappings&quot;:{&quot;UI3543faa32e3a41e5bd3bea4a0ae26db4&quot;:{&quot;DocumentTypeMappings&quot;:{&quot;Invoices.Accounting.InvoiceCZ&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.InvoiceCZ&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true},&quot;Invoices.Accounting.InvoiceEN&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.InvoiceEN&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true},&quot;Invoices.Accounting.InvoiceDE&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.InvoiceDE&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true},&quot;Invoices.Accounting.ProFormaCZ&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.ProFormaCZ&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:true},&quot;Invoices.Accounting.Upominka&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.Upominka&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false},&quot;Invoices.Accounting.StornoCZ&quot;:{&quot;OriginalDocumentTypeId&quot;:&quot;Invoices.Accounting.StornoCZ&quot;,&quot;ClassifierDocumentTypeId&quot;:null,&quot;IsDocumentTypeIdMapped&quot;:false}}}},&quot;ClassifierMinimumConfidence&quot;:{&quot;UI3543faa32e3a41e5bd3bea4a0ae26db4&quot;:&quot;0&quot;}}">
           <p2:TrainClassifiersScope.Trainables>
@@ -254,7 +255,7 @@
                 </Assign>
               </If.Then>
             </If>
-            <If sap2010:Annotation.AnnotationText="Only Invoice classification is further processed- other types to be added later on, then the condition here will be Classifications.Any" Condition="[HumanClassifications(0).DocumentTypeId.Contains(&quot;Invoices.Accounting.Invoice&quot;)]" DisplayName="If Classified" sap:VirtualizedContainerService.HintSize="940,786" sap2010:WorkflowViewState.IdRef="If_2">
+            <If sap2010:Annotation.AnnotationText="Only Invoice classification is further processed- other types to be added later on, then the condition here will be Classifications.Any" Condition="[HumanClassifications(0).DocumentTypeId.Contains(&quot;Invoices.Accounting.Invoice&quot;) OR HumanClassifications(0).DocumentTypeId.Contains(&quot;Invoices.Accounting.ProForma&quot;)]" DisplayName="If Classified" sap:VirtualizedContainerService.HintSize="940,786" sap2010:WorkflowViewState.IdRef="If_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
