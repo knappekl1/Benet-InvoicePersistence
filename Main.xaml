@@ -123,7 +123,6 @@
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap:VirtualizedContainerService.HintSize="762,1274.66666666667" sap2010:WorkflowViewState.IdRef="Flowchart_2">
@@ -160,7 +159,7 @@
           <av:PointCollection x:Key="ConnectorLocation">594,313.333333333333 594,364</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Validate" sap:VirtualizedContainerService.HintSize="520,1658.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_14">
+      <Sequence DisplayName="Validate" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
         <Sequence.Variables>
           <Variable x:TypeArguments="uiaam:DocumentClassificationActionData" Name="HumanOutput" />
         </Sequence.Variables>
@@ -368,119 +367,107 @@
                         <av:PointCollection x:Key="ConnectorLocation">594,801.333333333333 594,851</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="Move Email to Folder" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                    <Sequence DisplayName="Move Email to Folder" sap:VirtualizedContainerService.HintSize="1206,1943.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_30">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436.666666666667,148" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-                        <ui:CommentOut.Body>
-                          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each Mailbox" sap:VirtualizedContainerService.HintSize="1164,1838" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[in_MailBoxes]">
-                              <ui:ForEach.Body>
-                                <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:String)">
-                                  <ActivityAction.Argument>
-                                    <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:String)" Name="Mailbox" />
-                                  </ActivityAction.Argument>
-                                  <Sequence DisplayName="Try to Move Email" sap:VirtualizedContainerService.HintSize="1127.33333333333,1702.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_29">
-                                    <Sequence.Variables>
-                                      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="Mails" />
-                                    </Sequence.Variables>
+                      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each Mailbox" sap:VirtualizedContainerService.HintSize="1164,1851.33333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[in_MailBoxes]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:String)">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:String)" Name="Mailbox" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Try to Move Email" sap:VirtualizedContainerService.HintSize="1127.33333333333,1712.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="Mails" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:LogMessage DisplayName="Log MailBox" sap:VirtualizedContainerService.HintSize="1085.33333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;Working in Mailbox:  &quot; + Mailbox.Key]" />
+                              <If Condition="[in_MailAddresses.Contains(Mailbox.Key)]" DisplayName="If Mailbox relevant" sap:VirtualizedContainerService.HintSize="1085.33333333333,1424" sap2010:WorkflowViewState.IdRef="If_6">
+                                <If.Then>
+                                  <Sequence DisplayName="Identify Message and Move" sap:VirtualizedContainerService.HintSize="705.333333333333,1270" sap2010:WorkflowViewState.IdRef="Sequence_28">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:LogMessage DisplayName="Log MailBox" sap:VirtualizedContainerService.HintSize="1085.33333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;Working in Mailbox:  &quot; + Mailbox.Key]" />
-                                    <If Condition="[in_MailAddresses.Contains(Mailbox.Key)]" DisplayName="If Mailbox relevant" sap:VirtualizedContainerService.HintSize="1085.33333333333,1414" sap2010:WorkflowViewState.IdRef="If_6">
-                                      <If.Then>
-                                        <Sequence DisplayName="Identify Message and Move" sap:VirtualizedContainerService.HintSize="705.333333333333,1263.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_28">
-                                          <sap:WorkflowViewStateService.ViewState>
-                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            </scg:Dictionary>
-                                          </sap:WorkflowViewStateService.ViewState>
-                                          <ui:GetIMAPMailMessages TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Get all messages from Processing folder" DeleteMessages="False" DisplayName="Get IMAP Mail Messages" Email="[Mailbox.Key]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="663.333333333333,67.3333333333333" sap2010:WorkflowViewState.IdRef="GetIMAPMailMessages_2" MailFolder="[in_Config(&quot;ProcessingMailFolder&quot;).ToString]" MarkAsRead="False" Messages="[Mails]" OnlyUnreadMessages="False" Password="[Mailbox.Value]" Port="[Cint(in_Config(&quot;Port&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;Server&quot;).ToString]" Top="100">
+                                    <ui:GetIMAPMailMessages TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Get all messages from Processing folder" DeleteMessages="False" DisplayName="Get IMAP Mail Messages" Email="[Mailbox.Key]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="663.333333333333,67.3333333333333" sap2010:WorkflowViewState.IdRef="GetIMAPMailMessages_2" MailFolder="[in_Config(&quot;ProcessingMailFolder&quot;).ToString]" MarkAsRead="False" Messages="[Mails]" OnlyUnreadMessages="False" Password="[Mailbox.Value]" Port="[Cint(in_Config(&quot;Port&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;Server&quot;).ToString]" Top="100">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:GetIMAPMailMessages>
+                                    <ui:LogMessage DisplayName="Emails Count Log" sap:VirtualizedContainerService.HintSize="663.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;Emails Read in from Processing Folder:  &quot; + Mails.Count.ToString]" />
+                                    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each Email" sap:VirtualizedContainerService.HintSize="663.333333333333,936" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[Mails]">
+                                      <ui:ForEach.Body>
+                                        <ActivityAction x:TypeArguments="snm:MailMessage">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="Mail" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Select Message" sap:VirtualizedContainerService.HintSize="626.666666666667,797.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_27">
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
-                                          </ui:GetIMAPMailMessages>
-                                          <ui:LogMessage DisplayName="Emails Count Log" sap:VirtualizedContainerService.HintSize="663.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;Emails Read in from Processing Folder:  &quot; + Mails.Count.ToString]" />
-                                          <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each Email" sap:VirtualizedContainerService.HintSize="663.333333333333,929.333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[Mails]">
-                                            <ui:ForEach.Body>
-                                              <ActivityAction x:TypeArguments="snm:MailMessage">
-                                                <ActivityAction.Argument>
-                                                  <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="Mail" />
-                                                </ActivityAction.Argument>
-                                                <Sequence DisplayName="Select Message" sap:VirtualizedContainerService.HintSize="626.666666666667,794" sap2010:WorkflowViewState.IdRef="Sequence_27">
-                                                  <sap:WorkflowViewStateService.ViewState>
-                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                    </scg:Dictionary>
-                                                  </sap:WorkflowViewStateService.ViewState>
-                                                  <If Condition="[Mail.Headers(&quot;From&quot;).Equals(in_MailFrom) AND Mail.Headers(&quot;Date&quot;).Equals(in_MailDate)]" DisplayName="If Match" sap:VirtualizedContainerService.HintSize="584.666666666667,702" sap2010:WorkflowViewState.IdRef="If_5">
-                                                    <If.Then>
-                                                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,551.333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_3">
-                                                        <TryCatch.Try>
-                                                          <Sequence sap:VirtualizedContainerService.HintSize="376,313.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_26">
-                                                            <sap:WorkflowViewStateService.ViewState>
-                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                              </scg:Dictionary>
-                                                            </sap:WorkflowViewStateService.ViewState>
-                                                            <ui:MoveIMAPMailMessageToFolder DisplayName="Move IMAP Mail Message" Email="[Mailbox.Key]" EnableSSL="True" FromFolder="[in_Config(&quot;ProcessingMailFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_3" MailFolder="[TargetMailFolder]" MailMessage="[Mail]" Password="[Mailbox.Value]" Port="[Cint(in_Config(&quot;Port&quot;))]" SecureConnection="Auto" Server="[in_Config(&quot;Server&quot;).ToString]" />
-                                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Email Moved to &quot; + TargetMailFolder + &quot;Folder&quot;]" />
-                                                          </Sequence>
-                                                        </TryCatch.Try>
-                                                        <TryCatch.Catches>
-                                                          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_3">
-                                                            <sap:WorkflowViewStateService.ViewState>
-                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                              </scg:Dictionary>
-                                                            </sap:WorkflowViewStateService.ViewState>
-                                                            <ActivityAction x:TypeArguments="s:Exception">
-                                                              <ActivityAction.Argument>
-                                                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                                              </ActivityAction.Argument>
-                                                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Warn" Message="[&quot;Could not Move Email &quot; + Mail.Subject +&quot; in &quot; + Mailbox.Key + vbCr + exception.Message]" />
-                                                            </ActivityAction>
-                                                          </Catch>
-                                                        </TryCatch.Catches>
-                                                        <TryCatch.Finally>
-                                                          <ui:Break sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Break_3" />
-                                                        </TryCatch.Finally>
-                                                      </TryCatch>
-                                                    </If.Then>
-                                                  </If>
-                                                </Sequence>
-                                              </ActivityAction>
-                                            </ui:ForEach.Body>
-                                          </ui:ForEach>
-                                        </Sequence>
-                                      </If.Then>
-                                      <If.Else>
-                                        <ui:LogMessage DisplayName="Log Mailbox not Found" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;No Mail Address: &quot; + in_MailAddresses]" />
-                                      </If.Else>
-                                    </If>
-                                    <ui:Break sap:VirtualizedContainerService.HintSize="1085.33333333333,22" sap2010:WorkflowViewState.IdRef="Break_4" />
+                                            <If Condition="[Mail.Headers(&quot;From&quot;).Equals(in_MailFrom) AND Mail.Headers(&quot;Date&quot;).Equals(in_MailDate)]" DisplayName="If Match" sap:VirtualizedContainerService.HintSize="584.666666666667,705.333333333333" sap2010:WorkflowViewState.IdRef="If_5">
+                                              <If.Then>
+                                                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,551.333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                                                  <TryCatch.Try>
+                                                    <Sequence sap:VirtualizedContainerService.HintSize="376,313.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ui:MoveIMAPMailMessageToFolder DisplayName="Move IMAP Mail Message" Email="[Mailbox.Key]" EnableSSL="True" FromFolder="[in_Config(&quot;ProcessingMailFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_3" MailFolder="[TargetMailFolder]" MailMessage="[Mail]" Password="[Mailbox.Value]" Port="[Cint(in_Config(&quot;Port&quot;))]" SecureConnection="Auto" Server="[in_Config(&quot;Server&quot;).ToString]" />
+                                                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Email Moved to &quot; + TargetMailFolder + &quot;Folder&quot;]" />
+                                                    </Sequence>
+                                                  </TryCatch.Try>
+                                                  <TryCatch.Catches>
+                                                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ActivityAction x:TypeArguments="s:Exception">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                        </ActivityAction.Argument>
+                                                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Warn" Message="[&quot;Could not Move Email &quot; + Mail.Subject +&quot; in &quot; + Mailbox.Key + vbCr + exception.Message]" />
+                                                      </ActivityAction>
+                                                    </Catch>
+                                                  </TryCatch.Catches>
+                                                  <TryCatch.Finally>
+                                                    <ui:Break sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Break_3" />
+                                                  </TryCatch.Finally>
+                                                </TryCatch>
+                                              </If.Then>
+                                            </If>
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ForEach.Body>
+                                    </ui:ForEach>
                                   </Sequence>
-                                </ActivityAction>
-                              </ui:ForEach.Body>
-                            </ui:ForEach>
-                          </Sequence>
-                        </ui:CommentOut.Body>
-                      </ui:CommentOut>
+                                </If.Then>
+                                <If.Else>
+                                  <ui:LogMessage DisplayName="Log Mailbox not Found" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;No Mail Address: &quot; + in_MailAddresses]" />
+                                </If.Else>
+                              </If>
+                              <ui:Break sap:VirtualizedContainerService.HintSize="1085.33333333333,22" sap2010:WorkflowViewState.IdRef="Break_4" />
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                      </ui:ForEach>
                     </Sequence>
                     <FlowStep.Next>
                       <FlowStep x:Name="__ReferenceID4">
