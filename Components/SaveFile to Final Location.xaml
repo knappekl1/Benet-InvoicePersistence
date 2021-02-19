@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="SaveFile_to_Final_Location" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SaveFile_to_Final_Location" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_DocumentTypes" Type="InArgument(scg:Dictionary(x:String, x:Double))" />
@@ -18,7 +18,7 @@
   <sap:VirtualizedContainerService.HintSize>2154,1187.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SaveFile_to_Final_Location_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="22">
+    <scg:List x:TypeArguments="x:String" Capacity="44">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -41,6 +41,8 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -73,9 +75,10 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Check if document is classified (ie. is invoice) and save to a final location accordingly&#xA;&#xA;Input:&#xA;Classification results&#xA;FilePath&#xA;Config&#xA;&#xA;Output:&#xA;FinalFilePath" DisplayName="SaveFile to Final Location" sap:VirtualizedContainerService.HintSize="612,973.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Check if document is classified (ie. is invoice) and save to a final location accordingly&#xA;&#xA;Input:&#xA;Classification results&#xA;FilePath&#xA;Config&#xA;&#xA;Output:&#xA;FinalFilePath" DisplayName="SaveFile to Final Location" sap:VirtualizedContainerService.HintSize="612,968.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="FinalFolderPath" />
     </Sequence.Variables>
@@ -115,31 +118,66 @@
         <InArgument x:TypeArguments="x:String">[path.GetFullPath(path.Combine(FinalFolderPath, path.GetFileName(in_FilePath)))]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:MoveFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Moves file to final folder under the same file name (can be renamed if desired)" Destination="[out_FinalFilePath]" DisplayName="Move File to Final Location" sap:VirtualizedContainerService.HintSize="570,207.333333333333" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_FilePath]">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:MoveFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Log Event workflow" sap:VirtualizedContainerService.HintSize="570,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Log Event.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LogMessage">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;File Uploaded to &quot; + out_FinalFilePath" />
-        </InArgument>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LogFileMessage">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Attachment Saved to: &quot; + out_FinalFilePath" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LogText">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogText" />
-        </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
+    <TryCatch DisplayName="Try To move file " sap:VirtualizedContainerService.HintSize="570,356.666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence DisplayName="Move File and log" sap:VirtualizedContainerService.HintSize="426,453.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MoveFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Moves file to final folder under the same file name (can be renamed if desired)" Destination="[out_FinalFilePath]" DisplayName="Move File to Final Location" sap:VirtualizedContainerService.HintSize="384,207.333333333333" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_FilePath]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MoveFile>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Log Event workflow" sap:VirtualizedContainerService.HintSize="384,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Log Event.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogMessage">["File Uploaded to " + out_FinalFilePath]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFileMessage">["Attachment Saved to: " + out_FinalFilePath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogText">[in_LogText]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,184.666666666667" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Log Event workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Log Event.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogMessage">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Could not move file &quot; + path.GetFileName(in_FilePath)" />
+                </InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                  <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFileMessage">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Could not locate file: &quot; + in_FilePath" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogText">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogText" />
+                </InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
   </Sequence>
 </Activity>
